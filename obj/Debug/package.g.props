@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <PackageJsonName Condition="$(PackageJsonName) == ''">devzey-blog</PackageJsonName>
+    <PackageJsonVersion Condition="$(PackageJsonVersion) == ''">0.1.0</PackageJsonVersion>
+    <PackageJsonPrivate Condition="$(PackageJsonPrivate) == ''">true</PackageJsonPrivate>
+    <PackageJsonScriptsDev Condition="$(PackageJsonScriptsDev) == ''">next dev</PackageJsonScriptsDev>
+    <PackageJsonScriptsBuild Condition="$(PackageJsonScriptsBuild) == ''">next build</PackageJsonScriptsBuild>
+    <PackageJsonScriptsStart Condition="$(PackageJsonScriptsStart) == ''">next start</PackageJsonScriptsStart>
+    <PackageJsonScriptsTest Condition="$(PackageJsonScriptsTest) == ''">jest</PackageJsonScriptsTest>
+    <PackageJsonScriptsTestWatch Condition="$(PackageJsonScriptsTestWatch) == ''">jest --watch</PackageJsonScriptsTestWatch>
+    <PackageJsonScriptsTestCoverage Condition="$(PackageJsonScriptsTestCoverage) == ''">jest --coverage</PackageJsonScriptsTestCoverage>
+    <PackageJsonScriptsAdminInit Condition="$(PackageJsonScriptsAdminInit) == ''">ts-node utils/admin-init.ts</PackageJsonScriptsAdminInit>
+    <PackageJsonDependenciesBcryptjs Condition="$(PackageJsonDependenciesBcryptjs) == ''">^2.4.3</PackageJsonDependenciesBcryptjs>
+    <PackageJsonDependenciesJsonwebtoken Condition="$(PackageJsonDependenciesJsonwebtoken) == ''">^9.0.2</PackageJsonDependenciesJsonwebtoken>
+    <PackageJsonDependenciesNext Condition="$(PackageJsonDependenciesNext) == ''">14.0.4</PackageJsonDependenciesNext>
+    <PackageJsonDependenciesReact Condition="$(PackageJsonDependenciesReact) == ''">18.2.0</PackageJsonDependenciesReact>
+    <PackageJsonDependenciesReactDom Condition="$(PackageJsonDependenciesReactDom) == ''">18.2.0</PackageJsonDependenciesReactDom>
+    <PackageJsonDevdependenciesTypesBcryptjs Condition="$(PackageJsonDevdependenciesTypesBcryptjs) == ''">^2.4.6</PackageJsonDevdependenciesTypesBcryptjs>
+    <PackageJsonDevdependenciesTypesJest Condition="$(PackageJsonDevdependenciesTypesJest) == ''">^29.5.0</PackageJsonDevdependenciesTypesJest>
+    <PackageJsonDevdependenciesTypesJsonwebtoken Condition="$(PackageJsonDevdependenciesTypesJsonwebtoken) == ''">^9.0.5</PackageJsonDevdependenciesTypesJsonwebtoken>
+    <PackageJsonDevdependenciesTypesNode Condition="$(PackageJsonDevdependenciesTypesNode) == ''">^20.0.0</PackageJsonDevdependenciesTypesNode>
+    <PackageJsonDevdependenciesTypesReact Condition="$(PackageJsonDevdependenciesTypesReact) == ''">19.2.10</PackageJsonDevdependenciesTypesReact>
+    <PackageJsonDevdependenciesJest Condition="$(PackageJsonDevdependenciesJest) == ''">^29.5.0</PackageJsonDevdependenciesJest>
+    <PackageJsonDevdependenciesTypescript Condition="$(PackageJsonDevdependenciesTypescript) == ''">^5.0.0</PackageJsonDevdependenciesTypescript>
+  </PropertyGroup>
+</Project>
