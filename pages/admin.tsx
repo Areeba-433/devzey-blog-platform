@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import AdminDashboard from '../components/AdminDashboard';
+import Head from 'next/head';
 
 export default function AdminPage() {
   const router = useRouter();
@@ -13,5 +14,13 @@ export default function AdminPage() {
     }
   }, []);
 
-  return <AdminDashboard />;
+  return (
+    <>
+      <Head>
+        <title>Admin - DevZey Blog</title>
+        <meta name="robots" content="noindex,nofollow" />
+      </Head>
+      <AdminDashboard />
+    </>
+  );
 }

@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Small sensible defaults */
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+/* Improve default rendering for markdown content */
+.prose img {
+  max-width: 100%;
+  height: auto;
+}
+
+

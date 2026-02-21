@@ -7,6 +7,7 @@ import { getPosts } from '../lib/posts';
 import { getPlatformSettings } from '../utils/platform-settings';
 import { Post } from '../types/post';
 import SearchBar from '../components/SearchBar';
+import Layout from '../components/Layout';
 
 interface SearchPageProps {
   initialPosts: Post[];
@@ -121,16 +122,18 @@ export default function SearchPage({
   };
 
   return (
-    <>
+    <Layout>
       <Head>
         <title>
           {query ? `Search: "${query}" - ${settings.siteName}` : `Search - ${settings.siteName}`}
         </title>
         <meta
           name="description"
-          content={`Search results for "${query}" on ${settings.siteName}`}
+          content={query ? `Search results for "${query}" on ${settings.siteName}` : `Search posts on ${settings.siteName}`}
         />
-        <link rel="canonical" href={`${settings.siteUrl}/search?q=${encodeURIComponent(query)}`} />
+        {/* Search pages are typically not indexed to avoid thin/duplicate pages */}
+        <meta name="robots" content="noindex,follow" />
+        <link rel="canonical" href={`${settings.siteUrl}/search`} />
       </Head>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -360,7 +363,7 @@ export default function SearchPage({
             </div>
           )}
         </div>
-    </>
+    </Layout>
   );
 }
 

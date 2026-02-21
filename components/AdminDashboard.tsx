@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { AdminUser, AdminDashboardStats, PlatformSettings } from '../types/admin';
+import MarkdownEditor from './MarkdownEditor';
 import '../styles/admin.css';
 
 interface AdminDashboardProps {
@@ -1155,15 +1156,20 @@ function PostForm({
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Content *
+            Content * (Markdown)
           </label>
-          <textarea
-            value={formData.content}
-            onChange={(e) => handleChange('content', e.target.value)}
-            rows={8}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
+          <div className="mt-2">
+            <MarkdownEditor
+              value={formData.content}
+              onChange={(value) => handleChange('content', value)}
+              placeholder="Write your post content in Markdown format. Use **bold**, *italic*, `code`, and more..."
+              height={500}
+              preview="live"
+            />
+          </div>
+          <p className="mt-2 text-xs text-gray-500">
+            💡 Tip: Use Markdown syntax for formatting. The editor supports headings, lists, code blocks, links, images, and more.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

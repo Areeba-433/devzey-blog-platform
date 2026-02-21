@@ -2,6 +2,8 @@ import Head from 'next/head';
 import { GetServerSideProps } from 'next';
 import { getPostBySlug } from '../../lib/posts';
 import { getPlatformSettings } from '../../utils/platform-settings';
+import Layout from '../../components/Layout';
+import MarkdownRenderer from '../../components/MarkdownRenderer';
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const slug = params?.slug as string;
@@ -56,7 +58,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
 export default function PostPage({ post, seo }: any) {
   return (
-    <>
+    <Layout>
       <Head>
         <title>{seo.title}</title>
         <meta name="description" content={seo.description} />
@@ -75,9 +77,7 @@ export default function PostPage({ post, seo }: any) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seo.ogTitle} />
         <meta name="twitter:description" content={seo.ogDescription} />
-        {seo.ogImage && (
-          <meta name="twitter:image" content={seo.ogImage} />
-        )}
+        {seo.ogImage && <meta name="twitter:image" content={seo.ogImage} />}
 
         {/* Optional JSON-LD Structured Data */}
         {post.structuredData && (
@@ -85,33 +85,33 @@ export default function PostPage({ post, seo }: any) {
             type="application/ld+json"
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
-              __html: JSON.stringify(post.structuredData)
+              __html: JSON.stringify(post.structuredData),
             }}
           />
         )}
       </Head>
 
       <main className="max-w-3xl mx-auto px-4 py-10">
-        <article>
-          <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
+        <article className="bg-white rounded-lg border shadow-sm p-6 sm:p-10">
+          <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-gray-900">{post.title}</h1>
           <p className="text-sm text-gray-500 mb-6">
             By {post.author}{' '}
-            {post.publishedAt &&
-              `· ${new Date(post.publishedAt).toLocaleDateString()}`}
+            {post.publishedAt && `· ${new Date(post.publishedAt).toLocaleDateString()}`}
           </p>
           {post.featuredImage && (
             <img
               src={post.featuredImage}
               alt={post.title}
               className="mb-6 w-full rounded-md"
+              loading="lazy"
             />
           )}
           <div className="prose max-w-none">
-            {post.content}
+            <MarkdownRenderer value={post.content} />
           </div>
         </article>
       </main>
-    </>
+    </Layout>
   );
 }
 
