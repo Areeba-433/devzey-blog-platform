@@ -22,7 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 async function handleGetTags(res: NextApiResponse) {
   const posts = await getPosts({ published: true });
   const allTags = posts.flatMap(post => post.tags);
-  const uniqueTags = [...new Set(allTags)].sort();
+  const uniqueTags = Array.from(new Set(allTags)).sort();
 
   const tagStats = uniqueTags.map(tag => {
     const postsWithTag = posts.filter(post => post.tags.includes(tag));

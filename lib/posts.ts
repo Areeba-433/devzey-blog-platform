@@ -14,8 +14,8 @@ async function ensureDataDirectory() {
   }
 }
 
-// Generate a URL-friendly slug from title
-function generateSlug(title: string): string {
+// Generate a URL-friendly slug from title (exported for testing)
+export function generateSlug(title: string): string {
   return title
     .toLowerCase()
     .replace(/[^\w\s-]/g, '') // Remove special characters
@@ -39,15 +39,15 @@ async function ensureUniqueSlug(baseSlug: string, excludeId?: string): Promise<s
   return slug;
 }
 
-// Calculate reading time (roughly 200 words per minute)
-function calculateReadingTime(content: string): number {
+// Calculate reading time (roughly 200 words per minute, exported for testing)
+export function calculateReadingTime(content: string): number {
   const wordsPerMinute = 200;
-  const words = content.split(/\s+/).length;
-  return Math.ceil(words / wordsPerMinute);
+  const words = content.split(/\s+/).filter(w => w.length > 0).length;
+  return Math.max(1, Math.ceil(words / wordsPerMinute));
 }
 
-// Calculate word count
-function calculateWordCount(content: string): number {
+// Calculate word count (exported for testing)
+export function calculateWordCount(content: string): number {
   return content.split(/\s+/).filter(word => word.length > 0).length;
 }
 
@@ -327,22 +327,12 @@ export async function deletePost(id: string): Promise<boolean> {
 // Bulk operations
 export async function bulkDeletePost(ids: string[]): Promise<{ deleted: number; failed: string[] }> {
   const posts = await readPosts();
-  const initialCount = posts.length;
-  const failed: string[] = [];
-
-  const filteredPosts = posts.filter(post => {
-    if (ids.includes(post.id)) {
-      return false; // Remove this post
-    }
-    failed.push(post.id);
-    return true; // Keep this post
-  });
+  const filteredPosts = posts.filter(post => !ids.includes(post.id));
+  const deleted = posts.length - filteredPosts.length;
+  const failed = ids.filter(id => !posts.some(p => p.id === id));
 
   await writePosts(filteredPosts);
-  return {
-    deleted: initialCount - filteredPosts.length,
-    failed
-  };
+  return { deleted, failed };
 }
 
 export async function bulkUpdatePosts(ids: string[], updates: UpdatePostRequest): Promise<{ updated: number; failed: string[] }> {
@@ -460,12 +450,12 @@ export async function searchPosts(query: string, filters: PostFilters = {}): Pro
   // Score and rank posts based on relevance
   const scoredPosts = posts.map(post => {
     let score = 0;
-    const titleLower = post.title.toLowerCase();
-    const excerptLower = post.excerpt.toLowerCase();
-    const contentLower = post.content.toLowerCase();
-    const categoryLower = post.category.toLowerCase();
-    const authorLower = post.author.toLowerCase();
-    const tagsLower = post.tags.map(tag => tag.toLowerCase());
+    const titleLower = (post.title || '').toLowerCase();
+    const excerptLower = (post.excerpt || '').toLowerCase();
+    const contentLower = (post.content || '').toLowerCase();
+    const categoryLower = (post.category || '').toLowerCase();
+    const authorLower = (post.author || '').toLowerCase();
+    const tagsLower = (post.tags || []).map(tag => String(tag).toLowerCase());
 
     searchTerms.forEach(term => {
       // Title matches (highest weight)

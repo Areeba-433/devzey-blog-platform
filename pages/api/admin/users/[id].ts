@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getAdminUserById, updateAdminUser, deleteAdminUser, invalidateAllUserSessions } from '../../../../utils/admin-auth';
-import { withAdminAuth } from '../../../../utils/admin-middleware';
+import { withAdminAuth, AdminRequest } from '../../../../utils/admin-middleware';
 import { handleApiError, sendSuccess, sendNotFound } from '../../../../utils/api-errors';
 import { UpdateAdminUserRequest } from '../../../../types/admin';
 
@@ -153,7 +153,7 @@ async function handleUpdateUser(id: string, req: NextApiRequest, res: NextApiRes
   }
 }
 
-async function handleDeleteUser(id: string, req: NextApiRequest, res: NextApiResponse) {
+async function handleDeleteUser(id: string, req: AdminRequest, res: NextApiResponse) {
   // Prevent deleting self
   if (req.adminUser?.id === id) {
     res.status(400).json({

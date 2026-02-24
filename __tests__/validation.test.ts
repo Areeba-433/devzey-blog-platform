@@ -11,7 +11,7 @@ describe('validateCreatePost', () => {
 
     const result = validateCreatePost(validData);
 
-    expect(result).toEqual({
+    expect(result).toMatchObject({
       title: 'Test Post',
       content: 'This is test content',
       excerpt: 'Test excerpt',

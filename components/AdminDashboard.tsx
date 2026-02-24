@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { AdminUser, AdminDashboardStats, PlatformSettings } from '../types/admin';
 import MarkdownEditor from './MarkdownEditor';
-import '../styles/admin.css';
 
 interface AdminDashboardProps {
   onLogout?: () => void;

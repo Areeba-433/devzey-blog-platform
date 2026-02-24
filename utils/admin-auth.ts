@@ -220,6 +220,7 @@ export async function updateAdminUser(id: string, updates: {
   avatar?: string;
   isActive?: boolean;
   permissions?: AdminPermission[];
+  lastLoginAt?: Date;
 }): Promise<AdminUser | null> {
   const users = await readAdminUsers();
   const index = users.findIndex(u => u.id === id);
@@ -270,7 +271,8 @@ export async function updateAdminUser(id: string, updates: {
     firstName: updates.firstName !== undefined ? updates.firstName : user.firstName,
     lastName: updates.lastName !== undefined ? updates.lastName : user.lastName,
     avatar: updates.avatar !== undefined ? updates.avatar : user.avatar,
-    isActive: updates.isActive !== undefined ? updates.isActive : user.isActive
+    isActive: updates.isActive !== undefined ? updates.isActive : user.isActive,
+    lastLoginAt: updates.lastLoginAt !== undefined ? updates.lastLoginAt : user.lastLoginAt
   });
 
   users[index] = updatedUser;

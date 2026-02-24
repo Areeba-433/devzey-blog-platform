@@ -21,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 async function handleGetCategories(res: NextApiResponse) {
   const posts = await getPosts({ published: true });
-  const categories = [...new Set(posts.map(post => post.category))].sort();
+  const categories = Array.from(new Set(posts.map(post => post.category))).sort();
 
   const categoryStats = categories.map(category => {
     const postsInCategory = posts.filter(post => post.category === category);

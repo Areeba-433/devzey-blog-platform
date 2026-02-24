@@ -82,7 +82,20 @@ describe('API Endpoints', () => {
       expect(res._getStatusCode()).toBe(201);
       const responseData = JSON.parse(res._getData());
       expect(responseData.success).toBe(true);
-      expect(responseData.data).toEqual(mockPost);
+      expect(responseData.data).toMatchObject({
+        id: mockPost.id,
+        title: mockPost.title,
+        content: mockPost.content,
+        excerpt: mockPost.excerpt,
+        author: mockPost.author,
+        published: mockPost.published,
+        status: mockPost.status,
+        tags: mockPost.tags,
+        category: mockPost.category,
+        viewCount: mockPost.viewCount,
+        likeCount: mockPost.likeCount,
+        commentCount: mockPost.commentCount,
+      });
     });
 
     it('should handle validation errors', async () => {

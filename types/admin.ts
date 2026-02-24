@@ -140,6 +140,7 @@ export interface AdminDashboardStats {
   totalPosts: number;
   publishedPosts: number;
   draftPosts: number;
+  archivedPosts: number;
   totalUsers: number;
   activeUsers: number;
   totalComments: number;
