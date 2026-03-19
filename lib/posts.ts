@@ -425,7 +425,7 @@ export async function getPostStats(): Promise<{
     totalLikes: posts.reduce((sum, p) => sum + p.likeCount, 0),
     totalComments: posts.reduce((sum, p) => sum + p.commentCount, 0),
     averageReadingTime: posts.length > 0
-      ? Math.round(posts.reduce((sum, p) => sum + p.readingTime, 0) / posts.length)
+      ? Math.round(posts.reduce((sum, p) => sum + (p.readingTime ?? 0), 0) / posts.length)
       : 0,
   };
 

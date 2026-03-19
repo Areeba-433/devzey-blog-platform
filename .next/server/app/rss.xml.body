@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>DevZey Blog</title>
+    <link>http://localhost:3000</link>
+    <description>Developer-centric blog for DevZey.</description>
+    
+  </channel>
+</rss>

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import rehypeSanitize from 'rehype-sanitize';
+import rehypeHighlight from 'rehype-highlight';
 
 interface MarkdownRendererProps {
   value: string;
@@ -10,10 +10,10 @@ interface MarkdownRendererProps {
 
 export default function MarkdownRenderer({ value, className = '' }: MarkdownRendererProps) {
   return (
-    <div className={className}>
+    <div className={`prose prose-invert max-w-none ${className}`.trim()}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeSanitize]}
+        rehypePlugins={[rehypeHighlight]}
       >
         {value || ''}
       </ReactMarkdown>

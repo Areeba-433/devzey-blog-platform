@@ -14,4 +14,12 @@ html, body {
   height: auto;
 }
 
+/* Code highlighting baseline (rehype-highlight / highlight.js) */
+.prose pre {
+  @apply bg-slate-950/60 border border-slate-800/60 rounded-lg p-4 overflow-x-auto;
+}
+.prose code {
+  @apply text-slate-100;
+}
+
 

@@ -130,7 +130,7 @@ async function getSystemHealth() {
   }
 
   // Mock last backup date (in a real system, this would come from backup logs)
-  const lastBackup = null; // TODO: Implement backup tracking
+  const lastBackup = undefined; // TODO: Implement backup tracking
 
   return {
     uptime: Math.floor(uptime),

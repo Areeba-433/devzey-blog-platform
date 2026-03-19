@@ -221,7 +221,7 @@ export async function isMaintenanceMode(): Promise<boolean> {
 // Check if IP is allowed during maintenance
 export async function isIPAllowedDuringMaintenance(ip: string): Promise<boolean> {
   const settings = await readSettings();
-  return settings.maintenanceMode.allowedIPs.includes(ip);
+  return settings.maintenanceMode.allowedIPs?.includes(ip) ?? false;
 }
 
 // Get robots.txt content

@@ -1,0 +1,10 @@
+{
+  "/_not-found": "app/_not-found.js",
+  "/api/posts/[id]/upvote/route": "app/api/posts/[id]/upvote/route.js",
+  "/rss.xml/route": "app/rss.xml/route.js",
+  "/api/search/route": "app/api/search/route.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
+  "/(blog)/page": "app/(blog)/page.js",
+  "/(blog)/posts/[slug]/page": "app/(blog)/posts/[slug]/page.js",
+  "/search/page": "app/search/page.js"
+}

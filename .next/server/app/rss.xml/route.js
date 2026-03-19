@@ -1,0 +1,17 @@
+"use strict";(()=>{var e={};e.id=287,e.ids=[287],e.modules={1185:e=>{e.exports=require("mongoose")},517:e=>{e.exports=require("next/dist/compiled/next-server/app-route.runtime.prod.js")},2993:(e,t,r)=>{r.r(t),r.d(t,{headerHooks:()=>v,originalPathname:()=>y,patchFetch:()=>f,requestAsyncStorage:()=>m,routeModule:()=>d,serverHooks:()=>h,staticGenerationAsyncStorage:()=>g,staticGenerationBailout:()=>x});var n={};r.r(n),r.d(n,{GET:()=>p});var i=r(5419),o=r(9108),s=r(9678),a=r(8070),l=r(7033),c=r(7204);function u(e){return(e||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&apos;")}async function p(){let e=(0,l.n)()?await (async()=>(await (0,l.P)(),c.S.find({}).sort({createdAt:-1}).limit(50).select({title:1,slug:1,content:1,author:1,createdAt:1,seoMetadata:1}).lean()))():[],t=process.env.SITE_URL||"http://localhost:3000",r=e.map(e=>{let r=`${t}/posts/${e.slug}`,n=u(e.seoMetadata?.title||e.title),i=u(e.seoMetadata?.description||""),o=new Date(e.createdAt).toUTCString();return`
+        <item>
+          <title>${n}</title>
+          <link>${u(r)}</link>
+          <guid>${u(r)}</guid>
+          <pubDate>${o}</pubDate>
+          ${i?`<description>${i}</description>`:""}
+        </item>
+      `.trim()}).join("\n"),n=`<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>${u("DevZey Blog")}</title>
+    <link>${u(t)}</link>
+    <description>${u("Developer-centric blog for DevZey.")}</description>
+    ${r}
+  </channel>
+</rss>`;return new a.Z(n,{headers:{"Content-Type":"application/rss+xml; charset=utf-8","Cache-Control":"public, s-maxage=60, stale-while-revalidate=300"}})}let d=new i.AppRouteRouteModule({definition:{kind:o.x.APP_ROUTE,page:"/rss.xml/route",pathname:"/rss.xml",filename:"route",bundlePath:"app/rss.xml/route"},resolvedPagePath:"C:\\Users\\Track Computers\\source\\repos\\5th sem\\devzey-blog\\app\\rss.xml\\route.ts",nextConfigOutput:"",userland:n}),{requestAsyncStorage:m,staticGenerationAsyncStorage:g,serverHooks:h,headerHooks:v,staticGenerationBailout:x}=d,y="/rss.xml/route";function f(){return(0,s.patchFetch)({serverHooks:h,staticGenerationAsyncStorage:g})}},7033:(e,t,r)=>{r.d(t,{P:()=>a,n:()=>o});var n=r(1185),i=r.n(n);function o(){return!!process.env.MONGODB_URI}let s=global.mongooseCache??{conn:null,promise:null};async function a(){if(s.conn)return s.conn;if(!s.promise){let e=function(){let e=process.env.MONGODB_URI;if(!e)throw Error("Missing environment variable: MONGODB_URI");return e}();s.promise=i().connect(e,{bufferCommands:!1}).then(e=>e)}return s.conn=await s.promise,s.conn}global.mongooseCache=s},7204:(e,t,r)=>{r.d(t,{S:()=>s});var n=r(1185),i=r.n(n);let o=new n.Schema({title:{type:String,required:!0,trim:!0},slug:{type:String,required:!0,unique:!0,index:!0,trim:!0},content:{type:String,required:!0},author:{type:String,required:!0,trim:!0},tags:[{type:String,index:!0}],seoMetadata:{title:{type:String},description:{type:String},ogImage:{type:String}},upvotes:[{type:String}]},{timestamps:!0});o.index({title:"text",content:"text",tags:"text"});let s=i().models.Post||i().model("Post",o)}};var t=require("../../webpack-runtime.js");t.C(e);var r=e=>t(t.s=e),n=t.X(0,[456,206],()=>r(2993));module.exports=n})();
